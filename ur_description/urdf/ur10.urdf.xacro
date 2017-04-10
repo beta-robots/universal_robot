@@ -67,7 +67,8 @@
 		 elbow_joint_lower_limit:=${-pi}    elbow_joint_upper_limit:=${pi}
 		 wrist_1_lower_limit:=${-pi}    wrist_1_upper_limit:=${pi}
 		 wrist_2_lower_limit:=${-pi}    wrist_2_upper_limit:=${pi}
-		 wrist_3_lower_limit:=${-pi}    wrist_3_upper_limit:=${pi}">
+		 wrist_3_lower_limit:=${-pi}    wrist_3_upper_limit:=${pi}
+     precise_collision:=true">
 
     <link name="${prefix}base_link" >
       <visual>
@@ -78,11 +79,21 @@
           <color rgba="0.7 0.7 0.7 1.0"/>
         </material>
       </visual>
-      <collision>
-        <geometry>
-          <mesh filename="package://ur_description/meshes/ur10/collision/base.stl"/>
-        </geometry>
-      </collision>
+      <xacro:if value="${precise_collision}">
+        <collision>
+          <geometry>
+            <mesh filename="package://ur_description/meshes/ur10/collision/base.stl"/>
+          </geometry>
+        </collision>
+      </xacro:if>
+      <xacro:unless value="${precise_collision}">
+        <collision>
+          <origin xyz="0.0 -0.005 0.02" rpy="0 0 0" />
+          <geometry>
+            <box size="0.16 0.17 0.04"/>
+          </geometry>
+        </collision>
+      </xacro:unless>
       <xacro:cylinder_inertial radius="0.075" length="0.038" mass="${base_mass}">
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
       </xacro:cylinder_inertial>
@@ -111,11 +122,21 @@
           <color rgba="0.7 0.7 0.7 1.0"/>
         </material>
       </visual>
-      <collision>
-        <geometry>
-          <mesh filename="package://ur_description/meshes/ur10/collision/shoulder.stl"/>
-        </geometry>
-      </collision>
+      <xacro:if value="${precise_collision}">
+        <collision>
+          <geometry>
+            <mesh filename="package://ur_description/meshes/ur10/collision/shoulder.stl"/>
+          </geometry>
+        </collision>
+      </xacro:if>
+      <xacro:unless value="${precise_collision}">
+        <collision>
+          <origin xyz="0.0 0.015 0.0" rpy="0 0 0" />
+          <geometry>
+            <cylinder radius="0.10" length="0.18"/>
+          </geometry>
+        </collision>
+      </xacro:unless>
       <xacro:cylinder_inertial radius="0.075" length="0.178" mass="${shoulder_mass}">
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
       </xacro:cylinder_inertial>
@@ -144,11 +165,21 @@
           <color rgba="0.7 0.7 0.7 1.0"/>
         </material>
       </visual>
-      <collision>
-        <geometry>
-          <mesh filename="package://ur_description/meshes/ur10/collision/upperarm.stl"/>
-        </geometry>
-      </collision>
+      <xacro:if value="${precise_collision}">
+        <collision>
+          <geometry>
+            <mesh filename="package://ur_description/meshes/ur10/collision/upperarm.stl"/>
+          </geometry>
+        </collision>
+      </xacro:if>
+      <xacro:unless value="${precise_collision}">
+        <collision>
+          <origin xyz="0.0 -0.045 0.3" rpy="0 0 0" />
+          <geometry>
+            <cylinder radius="0.09" length="0.75"/>
+          </geometry>
+        </collision>
+      </xacro:unless>
       <xacro:cylinder_inertial radius="0.075" length="${-ur10_a2}" mass="${upper_arm_mass}">
         <origin xyz="0.0 0.0 ${-ur10_a2/2.0}" rpy="0 0 0" />
       </xacro:cylinder_inertial>
@@ -177,11 +208,21 @@
           <color rgba="0.7 0.7 0.7 1.0"/>
         </material>
       </visual>
-      <collision>
-        <geometry>
-          <mesh filename="package://ur_description/meshes/ur10/collision/forearm.stl"/>
-        </geometry>
-      </collision>
+      <xacro:if value="${precise_collision}">
+        <collision>
+          <geometry>
+            <mesh filename="package://ur_description/meshes/ur10/collision/forearm.stl"/>
+          </geometry>
+        </collision>
+      </xacro:if>
+      <xacro:unless value="${precise_collision}">
+        <collision>
+          <origin xyz="0.0 0.0 0.28" rpy="0 0 0" />
+          <geometry>
+            <cylinder radius="0.07" length="0.68"/>
+          </geometry>
+        </collision>
+      </xacro:unless>
       <xacro:cylinder_inertial radius="0.075" length="${-ur10_a3}" mass="${forearm_mass}">
         <origin xyz="0.0 0.0 ${-ur10_a3/2.0}" rpy="0 0 0" />
       </xacro:cylinder_inertial>
@@ -210,11 +251,21 @@
           <color rgba="0.7 0.7 0.7 1.0"/>
         </material>
       </visual>
-      <collision>
-        <geometry>
-          <mesh filename="package://ur_description/meshes/ur10/collision/wrist1.stl"/>
-        </geometry>
-      </collision>
+      <xacro:if value="${precise_collision}">
+        <collision>
+          <geometry>
+            <mesh filename="package://ur_description/meshes/ur10/collision/wrist1.stl"/>
+          </geometry>
+        </collision>
+      </xacro:if>
+      <xacro:unless value="${precise_collision}">
+        <collision>
+          <origin xyz="0.0 0.11 0.005" rpy="0 0 0" />
+          <geometry>
+            <cylinder radius="0.05" length="0.12"/>
+          </geometry>
+        </collision>
+      </xacro:unless>
       <xacro:cylinder_inertial radius="0.075" length="0.12" mass="${wrist_1_mass}">
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
       </xacro:cylinder_inertial>
@@ -243,11 +294,21 @@
           <color rgba="0.7 0.7 0.7 1.0"/>
         </material>
       </visual>
-      <collision>
-        <geometry>
-          <mesh filename="package://ur_description/meshes/ur10/collision/wrist2.stl"/>
-        </geometry>
-      </collision>
+      <xacro:if value="${precise_collision}">
+        <collision>
+          <geometry>
+            <mesh filename="package://ur_description/meshes/ur10/collision/wrist2.stl"/>
+          </geometry>
+        </collision>
+      </xacro:if>
+      <xacro:unless value="${precise_collision}">
+        <collision>
+          <origin xyz="0.0 0.005 0.115" rpy="1.5708 0 0" />
+          <geometry>
+            <cylinder radius="0.05" length="0.13"/>
+          </geometry>
+        </collision>
+      </xacro:unless>
       <xacro:cylinder_inertial radius="0.075" length="0.12" mass="${wrist_2_mass}">
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
       </xacro:cylinder_inertial>
@@ -276,11 +337,21 @@
           <color rgba="0.7 0.7 0.7 1.0"/>
         </material>
       </visual>
-      <collision>
-        <geometry>
-          <mesh filename="package://ur_description/meshes/ur10/collision/wrist3.stl"/>
-        </geometry>
-      </collision>
+      <xacro:if value="${precise_collision}">
+        <collision>
+          <geometry>
+            <mesh filename="package://ur_description/meshes/ur10/collision/wrist3.stl"/>
+          </geometry>
+        </collision>
+      </xacro:if>
+      <xacro:unless value="${precise_collision}">
+        <collision>
+          <origin xyz="0.0 0.078 0.0" rpy="1.5708 0 0" />
+          <geometry>
+            <cylinder radius="0.05" length="0.033"/>
+          </geometry>
+        </collision>
+      </xacro:unless>
       <xacro:cylinder_inertial radius="0.075" length="0.12" mass="${wrist_3_mass}">
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
       </xacro:cylinder_inertial>
