@@ -219,7 +219,19 @@
         <collision>
           <origin xyz="0.0 0.0 0.28" rpy="0 0 0" />
           <geometry>
-            <cylinder radius="0.07" length="0.68"/>
+            <cylinder radius="0.045" length="0.58"/>
+          </geometry>
+        </collision>
+        <collision>
+          <origin xyz="0.0 0.0 0.575" rpy="1.5708 0 0 " />
+          <geometry>
+            <cylinder radius="0.045" length="0.12"/>
+          </geometry>
+        </collision>
+        <collision>
+          <origin xyz="0.0 0.0 0.0" rpy="1.5708 0 0 " />
+          <geometry>
+            <cylinder radius="0.06" length="0.13"/>
           </geometry>
         </collision>
       </xacro:unless>
